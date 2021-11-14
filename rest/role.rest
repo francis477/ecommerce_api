@@ -1,0 +1,56 @@
+# --- ROLE API's ----
+#### Create   Role
+POST http://localhost:8888/ecommerce_api/api/add_role
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": "user"
+}
+
+#### Assign Role To  Permissions
+POST http://localhost:8888/ecommerce_api/api/create_role
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": 6,
+    "permission":["7","8","9","10"]
+}
+
+
+#### Get Role With Permission
+GET http://localhost:8888/ecommerce_api/api/show_role/5
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+
+
+#### Edit Permission Assign By Role
+GET http://localhost:8888/ecommerce_api/api/edit_role/6
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+
+#### Update Role Assign To Permission
+PUT http://localhost:8888/ecommerce_api/api/update_role/6
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": 6,
+    "permission":["7","8","9","3"]
+}
+
+
+#### Delete Role
+DELETE http://localhost:8888/ecommerce_api/api/delete_role/6
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+

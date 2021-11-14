@@ -1,0 +1,46 @@
+# --- PERMISSION API's ----
+#### Craete   Permissions
+POST http://localhost:8888/ecommerce_api/api/create_permission
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": [
+        "order-delete"
+    ]
+
+}
+
+
+#### Get All Permissions
+GET http://localhost:8888/ecommerce_api/api/all_permission
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+#### Get Permissions By Id
+GET http://localhost:8888/ecommerce_api/api/get_permission/11
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+
+
+#### Update  Permission By Id
+PUT http://localhost:8888/ecommerce_api/api/update_permission/11
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": "order-create"
+}
+
+
+#### Delete  Permission By Id
+DELETE  http://localhost:8888/ecommerce_api/api/delete_permission/12
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+

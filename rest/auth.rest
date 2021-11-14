@@ -1,0 +1,49 @@
+# --- AUTH API's ----
+#### Create   User
+POST http://localhost:8888/ecommerce_api/api/register
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": "francis",
+    "email": "francis477@gmail.com",
+    "password": "admin123",
+    "roles" : "superadmin"
+}
+
+
+
+#### Get All Users
+GET http://localhost:8888/ecommerce_api/api/users
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+#### Get User By Id
+GET http://localhost:8888/ecommerce_api/api/users/5
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+
+
+#### Update User By Id
+PUT http://localhost:8888/ecommerce_api/api/users/6
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "name": "francis",
+    "email": "francis477@gmail.com",
+    "roles" : "superadmin"
+}
+
+
+#### Delete User By Id
+DELETE  http://localhost:8888/ecommerce_api/api/delete_user/5
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
