@@ -30,7 +30,7 @@ Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0Ijox
 
 
 #### Edit Permission Assign By Role
-GET http://localhost:8888/ecommerce_api/api/edit_role/6
+GET http://localhost:8888/ecommerce_api/api/edit_role/5
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0

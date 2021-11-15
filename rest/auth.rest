@@ -3,13 +3,13 @@
 POST http://localhost:8888/ecommerce_api/api/register
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+Authorization:  Bearer 37|CXW6NqMzhzO4L1ovCMfq5Sb2hD1zJM3fcGtqPWZF
 
 {
-    "name": "francis",
-    "email": "francis477@gmail.com",
+    "name": "hhh",
+    "email": "felix@gmail.com",
     "password": "admin123",
-    "roles" : "superadmin"
+    "role" : 4
 }
 
 
@@ -21,7 +21,7 @@ Accept: application/json
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
 
 #### Get User By Id
-GET http://localhost:8888/ecommerce_api/api/users/5
+GET http://localhost:8888/ecommerce_api/api/users/9
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
@@ -42,8 +42,26 @@ Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0Ijox
 
 
 #### Delete User By Id
-DELETE  http://localhost:8888/ecommerce_api/api/delete_user/5
+DELETE  http://localhost:8888/ecommerce_api/api/delete_user/8
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
 
+
+#### Login
+POST http://localhost:8888/ecommerce_api/api/auth
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+
+{
+    "email": "felix@gmail.com",
+    "password": "admin123"
+}
+
+
+#### logout User
+POST http://localhost:8888/ecommerce_api/api/logout
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 35|5Exef5PGvJQvgkvJo3WnZrHRguLrzbsNmjAlWFhw

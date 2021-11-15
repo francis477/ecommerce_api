@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware'=>['auth:sanctum']],function () {
+
 Route::post('register', [AuthController::class, 'register']);
 Route::get('users', [AuthController::class, 'index']);
 Route::get('users/{id}', [AuthController::class, 'showUserById']);
@@ -39,4 +41,11 @@ Route::get('get_permission/{id}', [PermissionContorller::class, 'show']);
 Route::put('update_permission/{id}', [PermissionContorller::class, 'update']);
 Route::delete('delete_permission/{id}', [PermissionContorller::class, 'destroy']);
 Route::get('home', [HomeController::class, 'index']);
+Route::post('logout', [AuthController::class, 'logout']);
+
+});
+
+
+
+Route::post('auth', [AuthController::class, 'login']);
 

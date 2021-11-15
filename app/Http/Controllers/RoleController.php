@@ -6,10 +6,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
-
 
 class RoleController extends Controller
 {
@@ -23,10 +22,9 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id', 'DESC')->paginate(5);
         $success = 'Created Successful';
         return response(['data' => $roles, 'message' =>  $success,]);
-
     }
 
     public function createRole(Request $request)
@@ -37,7 +35,6 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $success = 'Created Successful';
         return response(['data' => $role, 'message' =>  $success,]);
-
     }
 
 
@@ -57,8 +54,6 @@ class RoleController extends Controller
         $success = 'Created Successful';
 
         return response(['message' =>  $success,]);
-
-
     }
     /**
      * Display the specified resource.
@@ -69,13 +64,13 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+            ->where("role_has_permissions.role_id", $id)
             ->get();
 
-            $success = 'Requested Successful';
+        $success = 'Requested Successful';
 
-            return response(['role' => $role, 'permission'=>$rolePermissions,'message' =>  $success,]);
+        return response(['role' => $role, 'permission' => $rolePermissions, 'message' =>  $success,]);
     }
 
 
@@ -89,14 +84,14 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $permission = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
 
-            $success = 'Requested Successful';
+        $success = 'Requested Successful';
 
-            return response(['role' => $role, 'permission'=>$permission, 'rolePermissions'=>$rolePermissions, 'message' =>  $success,]);
+        return response(['role' => $role, 'permission' => $permission, 'rolePermissions' => $rolePermissions, 'message' =>  $success,]);
     }
 
 
@@ -123,8 +118,6 @@ class RoleController extends Controller
         $success = 'Updated Successful';
 
         return response(['message' =>  $success,]);
-
-
     }
     /**
      * Remove the specified resource from storage.
@@ -134,7 +127,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        DB::table("roles")->where('id',$id)->delete();
+        DB::table("roles")->where('id', $id)->delete();
         $success = 'Deleted Successful';
         return response(['message' =>  $success,]);
     }
