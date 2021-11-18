@@ -1,0 +1,25 @@
+# --- PRODUCT API's ----
+#### Update   Product
+PUT http://localhost:8888/ecommerce_api/api/update_product/92
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+{
+    "pro_name": "Updated Product Two",
+    "pro_price": "233.00",
+    "pro_details": "Updated Product Details One",
+    "pro_stock" : 1,
+    "cat_id" : 2,
+    "brand_id" : 2
+
+
+}
+
+
+
+#### Delete Product
+GET http://localhost:8888/ecommerce_api/api/update_product/102
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ

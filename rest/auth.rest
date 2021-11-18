@@ -3,13 +3,13 @@
 POST http://localhost:8888/ecommerce_api/api/register
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 38|LsdiHC1b4r8flS9i8LfPbvFSTMsbecQfIetKSeuh
+Authorization:  Bearer 1|uC6kah3JKZXE44ZqAOOW13p5k2nWLAh3a7BAj2cA
 
 {
     "name": "emma",
-    "email": "felx@gmail.com",
+    "email": "emma@gmail.com",
     "password": "admin123",
-    "role" : 5
+    "role" : 1
 }
 
 
@@ -18,26 +18,26 @@ Authorization:  Bearer 38|LsdiHC1b4r8flS9i8LfPbvFSTMsbecQfIetKSeuh
 GET http://localhost:8888/ecommerce_api/api/users
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+Authorization:  Bearer 1|uC6kah3JKZXE44ZqAOOW13p5k2nWLAh3a7BAj2cA
 
 #### Get User By Id
-GET http://localhost:8888/ecommerce_api/api/users/9
+GET http://localhost:8888/ecommerce_api/api/users/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+Authorization:  Bearer 1|uC6kah3JKZXE44ZqAOOW13p5k2nWLAh3a7BAj2cA
 
 
 
 #### Update User By Id
-PUT http://localhost:8888/ecommerce_api/api/users/6
+PUT http://localhost:8888/ecommerce_api/api/users/9
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0Mjc5NjQ1LCJleHAiOjE2MjQzNjYwNDV9.ZlfzRFq5CuPx3vUXIuYrAVnempRc5CfwB7FIcdgeDf0
+Authorization:  Bearer 1|uC6kah3JKZXE44ZqAOOW13p5k2nWLAh3a7BAj2cA
 
 {
     "name": "francis",
     "email": "francis477@gmail.com",
-    "roles" : "superadmin"
+    "roles" : 5
 }
 
 

@@ -4,21 +4,37 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Facade\FlareClient\Http\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthController extends Controller
 {
     public $my_role;
 
+    function __construct()
+    {
+        $this->middleware(['role:superadmin|admin']);
+
+
+    }
+
+
     public function index(Request $request)
     {
+
+        if (!auth()->user()->can('user.view')) {
+            return abortAction();
+        }
+
         $users = User::all();
         foreach ($users as $key => $row) {
             if (!empty($row->getRoleNames())) {
@@ -45,6 +61,9 @@ class AuthController extends Controller
     //
     public function register(Request $request)
     {
+        if (!auth()->user()->can('user.create')) {
+            return abortAction();
+        }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:55',
@@ -76,29 +95,39 @@ class AuthController extends Controller
 
     public function showUserById($id)
     {
-        $user = User::find($id);
-        if (!empty($user->getRoleNames())) {
-            foreach ($user->getRoleNames() as $key => $role) {
-                $this->my_role =  $role;
-            }
+        if (!auth()->user()->can('user.view')) {
+            return abortAction();
+
         }
-        $data = [
-            "id" => $user->id,
-            "name" =>  $user->name,
-            "email" =>  $user->email,
-            "created_at" => $user->created_at,
-            "updated_at" => $user->updated_at,
-            "role" => $this->my_role
-        ];
 
+            $user = User::where("id",$id)->first();
 
-        $success = 'Created Successful';
-
-        return response(['user' => $data]);
+            if(!$user){
+                return notFound();
+              }
+            if (!empty($user->getRoleNames())) {
+                foreach ($user->getRoleNames() as $key => $role) {
+                    $this->my_role =  $role;
+                }
+            }
+            // $new = auth()->user();
+            $data = [
+                "id" => $user->id,
+                "name" =>  $user->name,
+                "email" =>  $user->email,
+                "created_at" => $user->created_at,
+                "updated_at" => $user->updated_at,
+                "role" => $this->my_role,
+                // 'test' => $new
+            ];
+            return response(['user' => $data]);
     }
 
     public function updateUserById(Request $request, $id)
     {
+        if (!auth()->user()->can('user.update')) {
+            return abortAction();
+        }
 
         $request->validate([
             'name' => 'required|max:55',
@@ -110,6 +139,7 @@ class AuthController extends Controller
         $input = $request->all();
         $user = User::find($id);
         $user->update($input);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles'));
 
         if (!empty($user->getRoleNames())) {
@@ -134,70 +164,15 @@ class AuthController extends Controller
 
     public function deleteUserById($id)
     {
+        if (!auth()->user()->can('user.delete')) {
+            return abortAction();
+        }
         User::find($id)->delete();
         $success = 'User deleted successfully';
         return response(['message' =>  $success,]);
     }
 
 
-    public function login(Request $request){
-        //Validate Fields
-        $fields = $request->validate([
-         'email'=>'required|string|email',
-         'password'=>'required|string'
-        ]);
-
-        //Check email
-
-        $user= User::where('email', $fields['email'])->first();
-
-        //Check Password
-        if(!$user || !Hash::check($fields['password'], $user->password) ){
-            return response([
-                'message'=>'Invalid Credentials'
-            ], 401);
-        }
-    //Create Token
-        $token = $user->createToken($user->id)->plainTextToken;
-           //Get User Role
-        $get_role = $user->roles;
-        foreach ($get_role as $key => $value) {
-            $row_id = $value['id'];
-            $row_name = $value['name'];
-        };
-
-            $data =
-             [
-                "user_id" => $user->id,
-                "user_name" => $user->name,
-                "user_email" => $user->email,
-                "createdAt" => $user->created_at,
-            ];
-
-        // $get_id= User::find($user->id);
-        // if (!empty($get_id->getRoleNames())) {
-        //     foreach ($get_id->getRoleNames() as $key => $role) {
-        //         $this->my_role =  $role;
-        //     }
-        // }
-
-        // $test = $user->roles->pluck('id');
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
-            ->where("role_has_permissions.role_id", $row_id)
-            ->get();
-
-        $response= [
-            'user' => $data,
-            'role_id'=> $row_id,
-            'role_name'=> $row_name,
-            'permissions' => $rolePermissions,
-            'token'=> $token
-
-
-        ];
-
-        return response($response, 201);
-    }
 
 
 

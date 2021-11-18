@@ -1,0 +1,45 @@
+# --- PRODUCT BRAND API's ----
+
+#### Get All Brand
+GEt http://localhost:8888/ecommerce_api/api/brand
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+
+
+#### Create Brand
+POST http://localhost:8888/ecommerce_api/api/create_brand
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+{
+    "name": "Brand One"
+
+}
+
+
+#### Show Brand By Id
+GET http://localhost:8888/ecommerce_api/api/brand/1
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+#### Update Brand By Id
+PUT http://localhost:8888/ecommerce_api/api/brand/1
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+{
+    "name": "Brand One Updated"
+}
+
+
+#### Delete Brand By Id
+DELETE http://localhost:8888/ecommerce_api/api/brand/2
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+

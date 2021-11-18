@@ -1,0 +1,44 @@
+# --- ROLE API's ----
+#### Create   Role
+GEt http://localhost:8888/ecommerce_api/api/category
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+
+
+#### Assign Role To  Permissions
+POST http://localhost:8888/ecommerce_api/api/create_category
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+{
+    "name": "Product One"
+
+}
+
+
+#### Show Category By Id
+GET http://localhost:8888/ecommerce_api/api/category/1
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+#### Update Category By Id
+PUT http://localhost:8888/ecommerce_api/api/category/1
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+{
+    "name": "Product One Updated"
+}
+
+
+#### Delete Role
+DELETE http://localhost:8888/ecommerce_api/api/category/1
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
