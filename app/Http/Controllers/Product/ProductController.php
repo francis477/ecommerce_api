@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Image;
 use Illuminate\Support\Facades\File;
 
+
 class ProductController extends Controller
 {
     //
@@ -59,9 +60,9 @@ class ProductController extends Controller
                 $multiple_img = $request->file('pro_image');
                 if ($request->hasfile('pro_image')) {
                     foreach ($request->file('pro_image') as $multiple_img) {
-                        $name_gen = hexdec(uniqid()) . '.' . $multiple_img->getClientOriginalExtension();
-                        Image::make($multiple_img)->encode('webp', 90)->resize(200, 250)->save(public_path('image/product/' . $name_gen));
-                        $last_img = $name_gen;
+                        $name_gen = hexdec(uniqid());
+                        Image::make($multiple_img)->encode('webp', 90)->resize(200, 250)->save(public_path('image/product/' . $name_gen . '.webp'));
+                        $last_img = $name_gen . '.webp';
 
                         $data = array(
                             'name' => $last_img,
@@ -84,48 +85,40 @@ class ProductController extends Controller
     {
         if (!auth()->user()->can('product.update')) {
             return abortAction();
-        }
+        };
 
         $image = ProductImage::find($id);
         if (!$image) {
             return response(['message' => 'Id not found'], 404);
-        }
+        };
 
         $validator = Validator::make($request->all(), [
-            'pro_image' => 'required|mimes:jpg,png,jpeg,webp|max:1048'
-
+            'pro_image' => 'required|image|mimes:jpg,png,jpeg,webp|max:1048'
         ]);
 
         if ($validator->fails()) {
             failedValidation($validator);
-        }
-
-
+        };
         if ($request->hasFile('pro_image')) {
+            $pro_img = $request->file('pro_image');
+            $name_gen = hexdec(uniqid());
             $destination = public_path('image/product/' . $image->name);
             if (File::exists($destination)) {
                 unlink($destination);
             }
-            $pro_img = $request->file('pro_image');
+            Image::make($pro_img)->encode('webp', 90)->resize(200, 250)->save(public_path('image/product/' . $name_gen . '.webp'));
+            $last_img = $name_gen . '.webp';
 
-            $name_gen =hexdec(uniqid()).'.'.$pro_img->getClientOriginalExtension();
-            Image::make($pro_img)->encode('webp', 90) ->resize(200, 250)->save(public_path('image/product/' . $name_gen));
-             $last_img = $name_gen ;
-             $data = [
-                 'name' => $last_img,
-             ];
-             $image->update($data);
-             $success = 'Updated Successful';
-             return response(['message' => $success]);
-
-        }else{
+            $data = [
+                'name' => $last_img
+            ];
+            $image->update($data);
+            $success = 'Updated Successful';
+            return response(['message' => $success]);
+        } else {
             $success = 'Something Went Wrong';
             return response(['message' => $success]);
         }
-
-
-
-
     }
 
 
@@ -134,9 +127,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         if (
-            !auth()
-                ->user()
-                ->can('product.update')
+            !auth()->user()->can('product.update')
         ) {
             return abortAction();
         }
@@ -145,8 +136,6 @@ class ProductController extends Controller
         if (!$product_tb) {
             return response(['message' => 'Id not found'], 404);
         }
-
-
         $validator = Validator::make($request->all(), [
             'pro_name' => 'required',
             'pro_price' => 'required',
@@ -159,7 +148,6 @@ class ProductController extends Controller
         if ($validator->fails()) {
             failedValidation($validator);
         } else {
-            // $product_tb->update($validator->validated());
             $product_tb->pro_name = $request->pro_name;
             $product_tb->pro_price = $request->pro_price;
             $product_tb->pro_details = $request->pro_details;
@@ -206,8 +194,8 @@ class ProductController extends Controller
             }
             Product::find($id)->delete();
             $success = 'Deleted successfully';
-            return response(['message' =>   $success]);
-        } catch (\Throwable $e) {
+            return response()->json(['message' =>   $success]);
+        } catch (\Exception $e) {
             //throw $th;
             return response()->json(['status' => 'false', 'message' => $e->getMessage(), 'data' => []]);
         }

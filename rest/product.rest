@@ -19,7 +19,7 @@ Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
 
 
 #### Delete Product
-GET http://localhost:8888/ecommerce_api/api/update_product/102
+GET http://localhost:8888/ecommerce_api/api/update_product/106
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
