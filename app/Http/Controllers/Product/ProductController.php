@@ -86,45 +86,42 @@ class ProductController extends Controller
             return abortAction();
         }
 
-        $image = ProductImage::where('id', $id)->first();
+        $image = ProductImage::find($id);
         if (!$image) {
             return response(['message' => 'Id not found'], 404);
         }
 
-        // $validator = Validator::make($request->all(), [
-        //     'pro_image' => 'required|mimes:jpg,png,jpeg|max:1048'
+        $validator = Validator::make($request->all(), [
+            'pro_image' => 'required|mimes:jpg,png,jpeg,webp|max:1048'
 
-        // ]);
+        ]);
 
-        // if ($validator->fails()) {
-        //     failedValidation($validator);
-        // }
+        if ($validator->fails()) {
+            failedValidation($validator);
+        }
 
-        $multiple_img = $request->hasFile('pro_image');
-        // $file = $request->pro_image->getClientOriginalName();
-        return response(['data' => $multiple_img]);
 
-        // if ($request->hasFile('pro_image')) {
-        //     $destination = public_path('image/product/' . $image->name);
-        //     if (File::exists($destination)) {
-        //         File::delete($destination);
-        //     }
-        //      $pro_img = $request->pro_image;
+        if ($request->hasFile('pro_image')) {
+            $destination = public_path('image/product/' . $image->name);
+            if (File::exists($destination)) {
+                unlink($destination);
+            }
+            $pro_img = $request->file('pro_image');
 
-        //     $name_gen =hexdec(uniqid()).'.'.$pro_img->getClientOriginalExtension();
-        //     Image::make($pro_img)->encode('webp', 90) ->resize(200, 250)->save(public_path('image/product/' . $name_gen));
-        //      $last_img = $name_gen ;
-        //      $data = [
-        //          'name' => $last_img,
-        //      ];
-        //      $image->update($data);
-        //      $success = 'Updated Successful';
-        //      return response(['message' => $success]);
+            $name_gen =hexdec(uniqid()).'.'.$pro_img->getClientOriginalExtension();
+            Image::make($pro_img)->encode('webp', 90) ->resize(200, 250)->save(public_path('image/product/' . $name_gen));
+             $last_img = $name_gen ;
+             $data = [
+                 'name' => $last_img,
+             ];
+             $image->update($data);
+             $success = 'Updated Successful';
+             return response(['message' => $success]);
 
-        // }else{
-        //     $success = 'Something Went Wrong';
-        //     return response(['message' => $success]);
-        // }
+        }else{
+            $success = 'Something Went Wrong';
+            return response(['message' => $success]);
+        }
 
 
 

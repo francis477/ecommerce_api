@@ -131,7 +131,7 @@ class AuthController extends Controller
 
         $request->validate([
             'name' => 'required|max:55',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,id,'.$request->user()->id,
             'roles' => 'required'
 
         ]);
