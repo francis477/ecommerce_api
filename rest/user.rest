@@ -1,49 +1,50 @@
-# --- AUTH API's ----
-#### Login
-POST http://localhost:8888/ecommerce_api/api/auth
+# --- USER API's ----
+#### Create   User
+POST http://localhost:8888/ecommerce_api/api/register
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
 {
-    "email": "francisteye477@gmail.com",
-    "password": "admin9095"
+    "name": "emma",
+    "email": "emma@gmail.com",
+    "password": "admin123",
+    "role" : 1
 }
 
 
-#### Get User Profile By ID
-GET http://localhost:8888/ecommerce_api/api/profile/1
+
+#### Get All Users
+GET http://localhost:8888/ecommerce_api/api/users
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+
+#### Get User By Id
+GET http://localhost:8888/ecommerce_api/api/users/2
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
 
-#### Update User Profile By ID
-PUT http://localhost:8888/ecommerce_api/api/profile/1
+
+#### Update User By Id
+PUT http://localhost:8888/ecommerce_api/api/users/1
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
 {
-     "name": "francis Teye",
-    "email": "francisteye477@gmail.com"
-
+    "name": "francis",
+    "email": "francis477@gmail.com",
+    "roles" : 1
 }
 
-#### Change User Password  By ID
-PUT http://localhost:8888/ecommerce_api/api/change_password/1
+
+#### Delete User By Id
+DELETE  http://localhost:8888/ecommerce_api/api/delete_user/8
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
-{
-    "old_pass": "admin9095",
-    "new_pass": "admin123"
-}
 
-
-#### logout User
-POST http://localhost:8888/ecommerce_api/api/logout
-Content-Type: application/json
-Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv

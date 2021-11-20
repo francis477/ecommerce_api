@@ -27,152 +27,83 @@ class AuthController extends Controller
 
     }
 
-
-    public function index(Request $request)
+    public function profile($id)
     {
 
-        if (!auth()->user()->can('user.view')) {
-            return abortAction();
-        }
-
-        $users = User::all();
-        foreach ($users as $key => $row) {
-            if (!empty($row->getRoleNames())) {
-                foreach ($row->getRoleNames() as $key => $role) {
-                    $this->my_role =  $role;
-                }
-            }
-            $data[] =
-                [
-                    'id' => $row['id'],
-                    'name' => $row['name'],
-                    'email' => $row['email'],
-                    "created_at" => $row['created_at'],
-                    "updated_at" => $row['updated_at'],
-                    'role' => $this->my_role,
-                ];
-        }
-        $success = 'Created Successful';
-        return response(['user' => $data, 'message' =>  $success,]);
-    }
-
-
-
-    //
-    public function register(Request $request)
-    {
-        if (!auth()->user()->can('user.create')) {
-            return abortAction();
-        }
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:55',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'role' => 'required'
-
-        ]);
-
-        if ($validator->fails()) {
-            failedValidation($validator);
-        }
-
-
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        $user->save();
-        $role_id = $request->input('role');
-        $role = Role::find($role_id);
-        $user->assignRole($role);
-        $success = 'Created Successful';
-        return response(['message' =>  $success, 'user' => $user,'role'=> $role]);
-    }
-
-
-
-    public function showUserById($id)
-    {
-        if (!auth()->user()->can('user.view')) {
-            return abortAction();
-
-        }
 
             $user = User::where("id",$id)->first();
 
             if(!$user){
                 return notFound();
               }
-            if (!empty($user->getRoleNames())) {
+              if (!empty($user->getRoleNames())) {
                 foreach ($user->getRoleNames() as $key => $role) {
                     $this->my_role =  $role;
                 }
             }
+
             // $new = auth()->user();
             $data = [
                 "id" => $user->id,
                 "name" =>  $user->name,
                 "email" =>  $user->email,
-                "created_at" => $user->created_at,
-                "updated_at" => $user->updated_at,
                 "role" => $this->my_role,
                 // 'test' => $new
             ];
             return response(['user' => $data]);
     }
 
-    public function updateUserById(Request $request, $id)
+
+    public function update_user_profile(Request $request,$id)
     {
-        if (!auth()->user()->can('user.update')) {
-            return abortAction();
-        }
-
-        $request->validate([
+        $user = User::find($id);
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:55',
-            'email' => 'required|email|unique:users,id,'.$request->user()->id,
-            'roles' => 'required'
+            'email' => 'required|string|email'
+        ]);
+        if ($validator->fails()) {
+            failedValidation($validator);
+        }
+         $user->name = $request->name;
+         $user->email = $request->email;
+         $user->save();
+        $success = 'Updated Successful';
+        return response(['message' =>  $success,]);
 
+    }
+
+
+
+    public function change_user_password(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_pass' => 'required',
+            'new_pass' => 'required|string|min:8',
         ]);
 
-        $input = $request->all();
+        if ($validator->fails()) {
+            failedValidation($validator);
+        }
+
         $user = User::find($id);
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-        $user->assignRole($request->input('roles'));
+        if (!(Hash::check($request->old_pass, $user->password))) {
+            // The passwords matches
+            $success = 'Your current password does not matches with the password.';
+            return response(['message' =>  $success,]);
 
-        if (!empty($user->getRoleNames())) {
-            foreach ($user->getRoleNames() as $key => $role) {
-                $this->my_role =  $role;
-            }
         }
 
-        $data = [
-            "id" => $user->id,
-            "name" =>  $user->name,
-            "email" =>  $user->email,
-            "created_at" => $user->created_at,
-            "updated_at" => $user->updated_at,
-            "role" => $this->my_role
-        ];
-
+        if(strcmp($request->old_pass, $request->new_pass) == 0){
+            // Current password and new password same
+            $success = 'New Password cannot be same as your current password.';
+            return response(['message' =>  $success,]);
+        }
+         //Change Password
+         $user->password = Hash::make($request->new_pass);
+         $user->save();
         $success = 'Updated Successful';
-
-        return response(['user' => $data, 'message' =>  $success,]);
-    }
-
-    public function deleteUserById($id)
-    {
-        if (!auth()->user()->can('user.delete')) {
-            return abortAction();
-        }
-        User::find($id)->delete();
-        $success = 'User deleted successfully';
         return response(['message' =>  $success,]);
     }
-
-
 
 
 

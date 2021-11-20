@@ -20,12 +20,13 @@ class Product extends Model
     protected $fillable = [
         'id',
         'pro_name',
+        'old_price',
         'pro_price',
         'pro_details',
         'pro_stock',
-        'user_id',
-        'cat_id',
-        'brand_id'
+        'category_id',
+        'brand_id',
+        'rating'
 
 
     ];
@@ -36,7 +37,23 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at',
-        'created_at',
+        'updated_at',
+        'user_id'
     ];
+
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+
+
+    public function product_image(){
+        return $this->hasMany(ProductImage::class,'pro_id');
+    }
+
+
 }

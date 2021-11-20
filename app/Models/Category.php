@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'pro_categories';
+    // protected $table = 'category';
 
       /**
      * The attributes that are mass assignable.
@@ -30,6 +30,6 @@ class Category extends Model
      */
     protected $hidden = [
         'created_at',
-        'created_at',
+        'updated_at',
     ];
 }

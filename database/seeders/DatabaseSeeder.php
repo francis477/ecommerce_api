@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\ProductReview;
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -79,11 +83,12 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'francis477',
             'email' => 'francisteye477@gmail.com',
-            'password' => Hash::make('admin123'),
+            'password' => Hash::make('admin123')
         ]);
+
         $admin_role = Role::create([
         'name' => 'superadmin',
-        'guard_name' => 'web',
+        'guard_name' => 'web'
     ]);
 
     $admin_role->syncPermissions([
@@ -99,6 +104,57 @@ class DatabaseSeeder extends Seeder
     $admin = User::findOrFail(1);
     $role = Role::find(1);
     $admin->assignRole($role);
+
+
+   Category::create([
+    'name' => 'Computing',
+    'slug' => 'Computing',
+    'user_id' => 1
+]);
+Category::create([
+    'name' => 'Electronic',
+    'slug' => 'Electronic',
+    'user_id' => 1
+]);
+Category::create([
+    'name' => 'Phones',
+    'slug' => 'Phones',
+    'user_id' => 1
+]);
+
+Category::create([
+    'name' => 'Fashion',
+    'slug' => 'Fashion',
+    'user_id' => 1
+]);
+
+Brand::create([
+    'name' => 'Andoer',
+    'slug' => 'Computing',
+    'user_id' => 1
+]);
+
+
+Brand::create([
+    'name' => 'Baofeng',
+    'slug' => 'Baofeng',
+    'user_id' => 1
+]);
+
+
+Brand::create([
+    'name' => 'Generic',
+    'slug' => 'Generic',
+    'user_id' => 1
+]);
+
+
+Brand::create([
+    'name' => 'Camelion',
+    'slug' => 'Camelion',
+    'user_id' => 1
+]);
+
 
 
 

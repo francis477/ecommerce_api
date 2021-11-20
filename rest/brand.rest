@@ -4,7 +4,7 @@
 GEt http://localhost:8888/ecommerce_api/api/brand
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+Authorization:  Bearer 1|eFn3jF475lGpr0NirXvSwRDjItjPvsRzKSFq7Nqo
 
 
 
@@ -12,7 +12,7 @@ Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
 POST http://localhost:8888/ecommerce_api/api/create_brand
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+Authorization:  Bearer 1|eFn3jF475lGpr0NirXvSwRDjItjPvsRzKSFq7Nqo
 
 {
     "name": "Brand One"

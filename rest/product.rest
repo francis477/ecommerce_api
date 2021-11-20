@@ -1,20 +1,41 @@
 # --- PRODUCT API's ----
 #### Update   Product
-PUT http://localhost:8888/ecommerce_api/api/update_product/92
+PUT http://localhost:8888/ecommerce_api/api/update_product/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
 
 {
-    "pro_name": "Updated Product Two",
+    "pro_name": "ProductOne",
     "pro_price": "233.00",
     "pro_details": "Updated Product Details One",
     "pro_stock" : 1,
-    "cat_id" : 2,
-    "brand_id" : 2
+    "category_id" : 1,
+    "rating" : 1,
+    "brand_id" : 1
 
 
 }
+
+#### Get All  Product
+GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
+
+
+#### Get All  Product
+# GET http://localhost:8888/ecommerce_api/api/all_product
+# Content-Type: application/json
+# Accept: application/json
+# Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
+
+
+### Get All  Product
+GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10&minPrice=100&maxPrice=300
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
 
 
 

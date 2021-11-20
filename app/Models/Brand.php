@@ -9,7 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $table = "pro_brands";
+    // protected $table = "brand";
 
       /**
      * The attributes that are mass assignable.
@@ -30,6 +30,6 @@ class Brand extends Model
      */
     protected $hidden = [
         'created_at',
-        'created_at',
+        'updated_at',
     ];
 }
