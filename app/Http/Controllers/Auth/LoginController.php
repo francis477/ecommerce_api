@@ -38,11 +38,14 @@ class LoginController extends Controller
             $row_name = $value['name'];
         };
 
+    //    $profile ='https://ui-avatars.com/api/?background=random&name='.urlencode($this->$user->name);
+
             $data =
              [
                 "user_id" => $user->id,
                 "user_name" => $user->name,
                 "user_email" => $user->email,
+               'pro_image' => $user->profile_image_url,
                 "createdAt" => $user->created_at,
             ];
 
@@ -61,11 +64,19 @@ class LoginController extends Controller
 
 
         $response= [
-            'user' => $data,
-            'role_id'=> $row_id,
+            'status_code'=> 200,
+            'status_message'=> "OK",
+            'data' =>
+            [
+               'user'=> $data,
+               'token'=> $token
+
+            ],
+            // 'role_id'=> $row_id,
+
             'role_name'=> $row_name,
-            'permissions' => $rolePermissions,
-            'token'=> $token
+            // 'permissions' => $rolePermissions,
+
 
 
 

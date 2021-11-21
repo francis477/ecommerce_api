@@ -3,11 +3,10 @@
 POST http://localhost:8888/ecommerce_api/api/auth
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
 {
     "email": "francisteye477@gmail.com",
-    "password": "admin9095"
+    "password": "admin123"
 }
 
 
@@ -15,14 +14,14 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 GET http://localhost:8888/ecommerce_api/api/profile/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|AoDX3H0SxiZKE7qodLaTopRHLqSfijREJkvo5pjs
 
 
 #### Update User Profile By ID
 PUT http://localhost:8888/ecommerce_api/api/profile/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|AoDX3H0SxiZKE7qodLaTopRHLqSfijREJkvo5pjs
 
 {
      "name": "francis Teye",
@@ -34,7 +33,7 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 PUT http://localhost:8888/ecommerce_api/api/change_password/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|AoDX3H0SxiZKE7qodLaTopRHLqSfijREJkvo5pjs
 
 {
     "old_pass": "admin9095",
@@ -44,6 +43,6 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 
 #### logout User
 POST http://localhost:8888/ecommerce_api/api/logout
-Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization: "Bearer 13|SbvCzi6ZByTFyaUGejKXX1XHsS81O0RKt3Qk6cpr
+Content-Type: application/json

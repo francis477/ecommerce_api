@@ -111,8 +111,9 @@ class AuthController extends Controller
 
          $request->user()->tokens()->delete();
          $response = [
-             'status'=>'success',
-             'message' => 'Logout Successful'
+            "status_code" => 200,
+            "status_message" => "OK",
+            "message" => "Logout successfully"
          ];
 
          return response($response,200);

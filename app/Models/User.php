@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'pro_image'
     ];
 
     /**
@@ -44,4 +45,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $appends = [
+        'profile_image_url'
+            ];
+
+
+            public function getProfileImageUrlAttribute(){
+                if($this->pro_image == null){
+                    return 'https://ui-avatars.com/api/?background=0d8abc&color=fff&name='.urlencode($this->name);
+                }
+
+            }
+
 }
