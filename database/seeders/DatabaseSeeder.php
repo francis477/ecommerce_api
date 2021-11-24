@@ -101,9 +101,38 @@ class DatabaseSeeder extends Seeder
       'permission.view', 'permission.create', 'permission.update', 'permission.delete',
       'contact.view', 'contact.create', 'contact.update', 'contact.delete'
 ]);
+
+
+$admin_new = Role::create([
+    'name' => 'admin',
+    'guard_name' => 'web'
+]);
+
+$admin_new->syncPermissions([
+'customer.view', 'customer.create', 'customer.update', 'customer.delete',
+'product.view', 'product.create', 'product.update', 'product.delete',
+'category.view', 'category.create', 'category.update', 'category.delete',
+'brand.view', 'brand.create', 'brand.update', 'brand.delete',
+  'contact.view', 'contact.create', 'contact.update', 'contact.delete'
+]);
+
+
+$user_new = Role::create([
+    'name' => 'user',
+    'guard_name' => 'web'
+]);
+
+$user_new->syncPermissions([
+'product.view', 'product.create', 'product.update', 'product.delete',
+'category.view', 'category.create', 'category.update', 'category.delete',
+'brand.view', 'brand.create', 'brand.update', 'brand.delete',
+  'contact.view', 'contact.create', 'contact.update', 'contact.delete'
+]);
+
+
     $admin = User::findOrFail(1);
     $role = Role::find(1);
-    $admin->assignRole($role);
+    $admin->assignRole($role->id);
 
 
    Category::create([

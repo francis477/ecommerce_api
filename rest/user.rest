@@ -3,13 +3,13 @@
 POST http://localhost:8888/ecommerce_api/api/register
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|COowG6BR6IHwv3nXNviEZcuNEAfoNXNYRi8nm5NO
 
 {
-    "name": "emma",
-    "email": "emma@gmail.com",
+    "name": "osei",
+    "email": "osei@gmail.com",
     "password": "admin123",
-    "role" : 1
+    "role" : 3
 }
 
 
@@ -18,13 +18,13 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 GET http://localhost:8888/ecommerce_api/api/users
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 2|qMESJLH6omUNs9gJywnABUG5XOo0jhNabHEkzx5S
 
 #### Get User By Id
-GET http://localhost:8888/ecommerce_api/api/users/2
+GET http://localhost:8888/ecommerce_api/api/users/5
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|COowG6BR6IHwv3nXNviEZcuNEAfoNXNYRi8nm5NO
 
 
 
@@ -32,12 +32,12 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 PUT http://localhost:8888/ecommerce_api/api/users/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|COowG6BR6IHwv3nXNviEZcuNEAfoNXNYRi8nm5NO
 
 {
     "name": "francis",
     "email": "francis477@gmail.com",
-    "roles" : 1
+    "role" : 1
 }
 
 
@@ -45,6 +45,6 @@ Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
 DELETE  http://localhost:8888/ecommerce_api/api/delete_user/8
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|p207qRw5Sj2UjIWVVkBdGvIEbNZjE88HjPaIv5Uv
+Authorization:  Bearer 1|COowG6BR6IHwv3nXNviEZcuNEAfoNXNYRi8nm5NO
 
 

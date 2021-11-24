@@ -14,7 +14,7 @@ Accept: application/json
 GET http://localhost:8888/ecommerce_api/api/profile/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|AoDX3H0SxiZKE7qodLaTopRHLqSfijREJkvo5pjs
+Authorization:  Bearer 3|1utDYTDfP5wyzLzHxSpHwA2eXI96F7ajcMSadOnC
 
 
 #### Update User Profile By ID
@@ -44,5 +44,5 @@ Authorization:  Bearer 1|AoDX3H0SxiZKE7qodLaTopRHLqSfijREJkvo5pjs
 #### logout User
 POST http://localhost:8888/ecommerce_api/api/logout
 Accept: application/json
-Authorization: "Bearer 13|SbvCzi6ZByTFyaUGejKXX1XHsS81O0RKt3Qk6cpr
+Authorization: "Bearer 2|gpoiEqa8F5P37Ecbk4WdOMIW3IUnO4sHETAv16we
 Content-Type: application/json

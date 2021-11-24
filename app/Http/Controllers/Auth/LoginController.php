@@ -29,14 +29,23 @@ class LoginController extends Controller
                 'message'=>'Invalid Credentials'
             ], 401);
         }
+        $RoleId = $user->roles->pluck('id')->all();
+        $get_id =   implode('' ,$RoleId);
+        $convert_id = (int)$get_id;
+        if($convert_id == null){
+            return response([
+                'message'=>'Access Denied!!!'
+            ], 401);
+        };
+
     //Create Token
         $token = $user->createToken($user->id)->plainTextToken;
            //Get User Role
         $get_role = $user->roles;
         foreach ($get_role as $key => $value) {
-            $row_id = $value['id'];
             $row_name = $value['name'];
         };
+
 
     //    $profile ='https://ui-avatars.com/api/?background=random&name='.urlencode($this->$user->name);
 
@@ -46,7 +55,9 @@ class LoginController extends Controller
                 "user_name" => $user->name,
                 "user_email" => $user->email,
                'pro_image' => $user->profile_image_url,
-                "createdAt" => $user->created_at,
+                // "createdAt" => $user->created_at,
+                "role_name"=> $row_name,
+                'role_id'=>$convert_id
             ];
 
         // $get_id= User::find($user->id);
@@ -56,25 +67,26 @@ class LoginController extends Controller
         //     }
         // }
 
-        // $test = $user->roles->pluck('id');
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
-            ->where("role_has_permissions.role_id", $row_id)
-            ->get();
+
+        // $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+        //     ->where("role_has_permissions.role_id", $row_id)
+        //     ->get();
 
 
 
         $response= [
             'status_code'=> 200,
-            'status_message'=> "OK",
+            'status_message'=> "Login Successful",
             'data' =>
             [
                'user'=> $data,
                'token'=> $token
 
+
             ],
             // 'role_id'=> $row_id,
 
-            'role_name'=> $row_name,
+
             // 'permissions' => $rolePermissions,
 
 

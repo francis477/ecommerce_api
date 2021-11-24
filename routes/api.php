@@ -45,6 +45,7 @@ Route::post('logout', [AuthController::class,'logout']);
     Route::delete('delete_user/{id}', [UserController::class,'deleteUserById']);
 
     // User Role
+    Route::get('roles', [RoleController::class,'index']);
     Route::post('add_role', [RoleController::class,'createRole']);
     Route::post('create_role', [RoleController::class,'store']);
     Route::get('show_role/{id}', [RoleController::class,'show']);

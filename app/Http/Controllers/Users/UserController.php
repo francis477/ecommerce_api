@@ -22,9 +22,7 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware(['role:superadmin|admin']);
-
-
+      $this->middleware(['role:superadmin']);
     }
 
 
@@ -44,7 +42,7 @@ class UserController extends Controller
                     $this->my_role =  $role;
                 }
             }
-            $name =$this->my_role;
+
             $data[] =
                 [
                     'id' => $row['id'],
@@ -52,11 +50,20 @@ class UserController extends Controller
                     'email' => $row['email'],
                     "created_at" => $row['created_at'],
                     "updated_at" => $row['updated_at'],
-                    'role' => $name
+                    'role' => $this->my_role
                 ];
         }
-        $success = 'Created Successful';
-        return response(['user' => $data, 'message' =>  $success,]);
+        $success = 'Requested Successfully';
+        return response(
+            [
+            'status' => 201,
+            'message' =>  $success,
+            'data' =>
+            [
+                'items' => $data
+            ],
+
+            ]);
     }
 
 
@@ -72,7 +79,7 @@ class UserController extends Controller
             'name' => 'required|max:55',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string',
-            'role' => 'required'
+            'roles' => 'required'
 
         ]);
 
@@ -87,11 +94,11 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $user->save();
-        $role_id = $request->input('role');
-        $role = Role::find($role_id);
-        $user->assignRole($role);
+        // $role_id = $request->input('roles');
+        // $role = Role::find($role_id);
+        $user->assignRole($request->input('roles'));
         $success = 'Created Successful';
-        return response(['message' =>  $success, 'user' => $user,'role'=> $role]);
+        return response(['message' =>  $success, 'user' => $user]);
     }
 
 
@@ -108,12 +115,15 @@ class UserController extends Controller
             if(!$user){
                 return notFound();
               }
-            $user_role = auth()->user();
-            foreach ($user_role->roles as $value) {
-                $role_id =  $value->id;
-                $role_name =  $value->name;
-            }
+            // $user_role = auth()->user();
+            // foreach ($user_role->roles as $value) {
+            //     $role_id =  $value->id;
+            //     $role_name =  $value->name;
+            // }
 
+            $userRole = $user->roles->pluck('id')->all();
+            $role_id =   implode('' ,$userRole);
+            $convert_id = (int)$role_id;
 
             $data = [
                 "id" => $user->id,
@@ -121,10 +131,16 @@ class UserController extends Controller
                 "email" =>  $user->email,
                 "created_at" => $user->created_at,
                 "updated_at" => $user->updated_at,
-                "role_id" =>  $role_id,
-                'role_name' => $role_name
+                'roles' => $convert_id
+                // "role_id" =>  $role_id,
+                // 'role_name' => $role_name
             ];
-            return response(['user' => $data]);
+            return response([
+                'data' => [
+                'user'=>$data,
+
+                ]
+            ]);
     }
 
     public function updateUserById(Request $request, $id)
@@ -172,7 +188,7 @@ class UserController extends Controller
             return abortAction();
         }
         User::find($id)->delete();
-        $success = 'User deleted successfully';
+        $success = 'Deleted successfully';
         return response(['message' =>  $success,]);
     }
 

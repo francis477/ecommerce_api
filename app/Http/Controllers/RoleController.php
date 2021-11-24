@@ -13,7 +13,10 @@ use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
 
-
+    function __construct()
+    {
+      $this->middleware(['role:superadmin']);
+    }
 
     /**
      * Display a listing of the resource.
@@ -22,9 +25,16 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
-        $success = 'Created Successful';
-        return response(['data' => $roles, 'message' =>  $success,]);
+        $roles = Role::orderBy('id', 'DESC')->get();
+        foreach ($roles as $value) {
+
+            $data [] = [
+                'id' => $value['id'],
+                'name' => $value['name']
+            ];
+        }
+        $success = 'Requested Successfully';
+        return response(['message' =>  $success,'data' =>['items'=>$data]] );
     }
 
     public function createRole(Request $request)
@@ -32,8 +42,14 @@ class RoleController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:roles,name'
         ]);
-        $role = Role::create(['name' => $request->input('name')]);
-        $success = 'Created Successful';
+        $role = Role::create(
+            [
+                'name' => $request->input('name'),
+                'guard_name' => "web"
+
+                ]
+        );
+        $success = 'Created Successfully';
         return response(['data' => $role, 'message' =>  $success,]);
     }
 
@@ -51,7 +67,7 @@ class RoleController extends Controller
         $role = Role::find($role_id);
         $role->syncPermissions($request->input('permission'));
 
-        $success = 'Created Successful';
+        $success = 'Created Successfully';
 
         return response(['message' =>  $success,]);
     }
@@ -68,9 +84,30 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id", $id)
             ->get();
 
-        $success = 'Requested Successful';
+            foreach ($rolePermissions as $value) {
 
-        return response(['role' => $role, 'permission' => $rolePermissions, 'message' =>  $success,]);
+                $permission_data[] = [
+                    'id' =>  $value['id'],
+                    'name' =>  $value['name'],
+                ];
+
+                # code...
+            }
+
+        $success = 'Requested Successfully';
+        $roel_data = [
+            'id' => $role->id,
+            'name' => $role->name
+        ];
+
+        return response(
+        [
+        'message' =>  $success,
+        'data' => [
+            'items' => [
+             'role' => $roel_data, 'permissions' => $permission_data
+            ]
+        ]]);
     }
 
 
@@ -89,7 +126,7 @@ class RoleController extends Controller
             ->all();
 
 
-        $success = 'Requested Successful';
+        $success = 'Requested Successfully';
 
         return response(['role' => $role, 'permission' => $permission, 'rolePermissions' => $rolePermissions, 'message' =>  $success,]);
     }
@@ -112,10 +149,11 @@ class RoleController extends Controller
 
         $role = Role::find($id);
         $role->name = $request->input('name');
+        $role->guard_name = "web";
         $role->save();
         $role->syncPermissions($request->input('permission'));
 
-        $success = 'Updated Successful';
+        $success = 'Updated Successfully';
 
         return response(['message' =>  $success,]);
     }
@@ -128,7 +166,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id', $id)->delete();
-        $success = 'Deleted Successful';
+        $success = 'Deleted Successfully';
         return response(['message' =>  $success,]);
     }
 }

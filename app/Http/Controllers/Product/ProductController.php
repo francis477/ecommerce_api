@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+    function __construct()
+    {
+      $this->middleware(['role:superadmin|admin']);
+    }
 
     public function index(Request $request){
         if (!auth()->user()->can('product.view')) {
