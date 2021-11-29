@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,15 @@ class CategoryController extends Controller
         $category = Category::all();
 
         $success = 'Requested Successful';
-        return response(['user' => $category, 'message' =>  $success,]);
+        return response([
+            'status' => 200,
+            'message' =>  $success,
+            'data' =>
+            [
+                'items' => $category
+            ],
+
+        ]);
     }
 
 
@@ -48,7 +57,7 @@ class CategoryController extends Controller
         $category = new Category([
             'name' => $request->name,
             'slug' => $slug,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id
         ]);
         $category->save();
         $success = 'Created Successful';

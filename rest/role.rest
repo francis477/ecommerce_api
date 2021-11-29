@@ -5,8 +5,7 @@
 GET http://localhost:8888/ecommerce_api/api/roles
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 6|qzOSCYMK3Hpd13QlRmad89nvoRJERSFA15JAK9BK
-
+Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
 
 #### Create   Role
 POST http://localhost:8888/ecommerce_api/api/add_role

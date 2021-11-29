@@ -26,7 +26,8 @@ class Product extends Model
         'pro_stock',
         'category_id',
         'brand_id',
-        'rating'
+        'rating',
+        'user_id'
 
 
     ];

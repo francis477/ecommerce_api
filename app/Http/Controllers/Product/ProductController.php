@@ -7,11 +7,10 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Facades\Validator;
 use Image;
 use Illuminate\Support\Facades\File;
-
-
+use Validator;
 class ProductController extends Controller
 {
     function __construct()
@@ -89,6 +88,116 @@ $perpage = $request->perpage;
         $success = 'Created Successful';
         return response(['product' => $product, 'message' =>  $success,]);
     }
+
+
+
+
+    public function get_product(Request $request){
+        if (!auth()->user()->can('product.view')) {
+            return abortAction();
+        }
+
+        $query_product = Product::with(['category','brand','product_image']);
+
+
+        if($request->keyword){
+            $query_product->where('pro_name', 'LIKE', '%' .$request->keyword.'%');
+        }
+
+        if($request->category){
+            $query_product->whereHas('category', function($query) use ($request){
+                $query->where('slug', $request->category);
+            });
+        }
+
+        if($request->brand){
+            $query_product->whereHas('brand', function($query) use ($request){
+                $query->where('slug', $request->brand);
+            });
+        }
+
+
+
+
+        if($request->brand){
+            $query_product->whereHas('brand', function($query) use ($request){
+                $query->where('slug', $request->brand);
+            });
+        }
+
+        if($request->sortBy && in_array($request->sortBy,['id','created_at'])){
+            $sortBy = $request->sortBy;
+        }else{
+            $sortBy = 'id';
+        }
+
+        if($request->sortOrder && in_array($request->sortOrder,['asc','desc'])){
+            $sortOrder = $request->sortOrder;
+        }else{
+            $sortOrder = 'desc';
+        }
+
+        if($request->perpage){
+$perpage = $request->perpage;
+        }else{
+            $perpage = 10;
+        }
+
+        if($request->paginate){
+            $product = $query_product->OrderBY($sortBy,$sortOrder)->paginate($perpage);
+        }else{
+            $product = $query_product->OrderBY($sortBy,$sortOrder)->get();
+        }
+
+        // foreach($product as $value){
+
+        //     $p_product [] = [
+        //         "id" => $value['id'],
+        //         "pro_name" => $value['pro_name'],
+        //         "old_price"=> $value['old_price'],
+        //         "pro_price" => $value['pro_price'],
+        //         "pro_details" =>  $value['pro_details'],
+        //         "pro_stock" => $value['pro_stock'],
+        //         "rating"=> $value['rating'],
+        //         "category_id"=> $value['category_id'],
+        //         "brand_id"=> $value['brand_id'],
+        //         "created_at"=> $value['created_at'],
+        //     ];
+
+
+        //     foreach ($product->category as $value) {
+
+        //         $p_category [] = [
+        //             "name" => $value['name'],
+
+        //         ];
+
+        //     };
+
+
+        //     foreach ($product->brand as $value) {
+
+        //         $p_brand [] = [
+        //             "name" => $value['name'],
+
+        //         ];
+
+        //     };
+
+
+        // }
+
+        $success = 'Requested Successful';
+        return response([
+
+            'message' =>  $success,
+            'data'=> [
+                'items' => $product
+            ]
+        ]);
+    }
+
+
     //
     public function store(Request $request)
     {
@@ -108,14 +217,15 @@ $perpage = $request->perpage;
             'category_id' => 'required',
             'rating' => 'required',
             'brand_id' => 'required',
-            'pro_image' => 'required',
-            'pro_image.*' => 'required',
+            'pro_image' => 'required|max:1000',
+            'pro_image.*' => 'required|max:1000',
         ]);
 
         if ($validator->fails()) {
             failedValidation($validator);
         }else{
-        $cal_rate = ($request->rating * 5) / 100;
+        // $cal_rate = ($request->rating * 5) / 100;
+        // number_format($cal_rate,0);
         $product_tb = new Product();
         $product_img_tb = new ProductImage();
         $product_tb->pro_name = $request->pro_name;
@@ -124,7 +234,7 @@ $perpage = $request->perpage;
         $product_tb->pro_details = $request->pro_details;
         $product_tb->pro_stock = $request->pro_stock;
         $product_tb->category_id = $request->category_id;
-        $product_tb->rating = number_format($cal_rate,0);
+        $product_tb->rating =$request->rating;
         $product_tb->brand_id = $request->brand_id;
         $product_tb->user_id = auth()->user()->id;
 
@@ -231,14 +341,14 @@ $perpage = $request->perpage;
             failedValidation($validator);
         } else {
 
-            $cal_rate = ($request->rating * 5) / 100;
+            // $cal_rate = ($request->rating * 5) / 100;
             $product_tb->pro_name = $request->pro_name;
             $product_tb->pro_price = $request->pro_price;
             $product_tb->old_price = $request->old_price;
             $product_tb->pro_details = $request->pro_details;
             $product_tb->pro_stock = $request->pro_stock;
             $product_tb->category_id = $request->category_id;
-            $product_tb->rating = $cal_rate;
+            $product_tb->rating = $request->rating;
             $product_tb->brand_id = $request->brand_id;
             $product_tb->user_id = auth()->user()->id;
 
@@ -262,7 +372,7 @@ $perpage = $request->perpage;
             if (!auth()->user()->can('product.delete')) {
                 return abortAction();
             }
-            $product = Product::where("id", $id)->first();
+            $product = Product::find($id);
 
             if (!$product) {
                 return notFound();
@@ -287,6 +397,29 @@ $perpage = $request->perpage;
         }
     }
 
+    public function destroy_image($id)
+    {
+
+        try {
+            if (!auth()->user()->can('product.delete')) {
+                return abortAction();
+            }
+            $product = ProductImage::where("id", $id)->first();
+            if (!$product) {
+                return notFound();
+            }
+                $destination = public_path('image/product/' . $product->name);
+                if (File::exists($destination)) {
+                    unlink($destination);
+                }
+            ProductImage::find($product->id)->delete();
+            $success = 'Deleted successfully';
+            return response()->json(['message' =>   $success]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'false', 'message' => $e->getMessage()]);
+        }
+    }
+
 
     public function add_more_image(Request $request){
 
@@ -296,8 +429,8 @@ $perpage = $request->perpage;
 
         $validator = Validator::make($request->all(), [
             'pro_id' => 'required',
-            'pro_image' => 'required',
-            'pro_image.*' => 'required',
+            'pro_image' => 'required|max:1000',
+            'pro_image.*' => 'required|max:1000',
         ]);
 
         if ($validator->fails()) {
@@ -343,6 +476,30 @@ $perpage = $request->perpage;
 
 
 
+    }
+
+
+    public function images($pro_id)
+    {
+
+        if (!auth()->user()->can('product.view')) {
+            return abortAction();
+        }
+
+        // $product_img_tb = new ProductImage($id);
+
+        $images = ProductImage::where('pro_id', $pro_id)->get();
+
+        $success = 'Requested Successful';
+        return response([
+            'status' => 200,
+            'message' =>  $success,
+            'data' =>
+            [
+                'items' => $images
+            ],
+
+        ]);
     }
 
 }

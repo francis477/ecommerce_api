@@ -17,11 +17,23 @@ Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
 
 }
 
+
+
+#### Get All  Product
+GET http://localhost:8888/ecommerce_api/api/all_product_two
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+
+
+
 #### Get All  Product
 GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
+Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+
+
 
 
 #### Get All  Product
@@ -40,7 +52,14 @@ Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
 
 
 #### Delete Product
-GET http://localhost:8888/ecommerce_api/api/update_product/106
+DELETE  http://localhost:8888/ecommerce_api/api/delete_product/106
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 1|wtvDXSYxo3HdLsXjFsBHRPV8TLuJBm5HqepNxwuZ
+
+
+#### Delete Product
+GET  http://localhost:8888/ecommerce_api/api/all_images/3
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 2|G54J9X8d4KpxKwOyaLwayWJRZsLGVoaWz0sZFNKO

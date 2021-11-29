@@ -20,7 +20,8 @@ class Brand extends Model
     protected $fillable = [
         'id',
         'name',
-        'slug'
+        'slug',
+        'user_id'
     ];
 
       /**

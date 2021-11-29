@@ -3,7 +3,7 @@
 GEt http://localhost:8888/ecommerce_api/api/category
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|eFn3jF475lGpr0NirXvSwRDjItjPvsRzKSFq7Nqo
+Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
 
 
 
@@ -11,7 +11,7 @@ Authorization:  Bearer 1|eFn3jF475lGpr0NirXvSwRDjItjPvsRzKSFq7Nqo
 POST http://localhost:8888/ecommerce_api/api/create_category
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|eFn3jF475lGpr0NirXvSwRDjItjPvsRzKSFq7Nqo
+Authorization:  Bearer 20|R5wEOxMpvnrH89J2Bb2Dw3cKOUTZgdG3x2I3FxdQ
 
 {
     "name": "Product One"

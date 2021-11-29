@@ -7,7 +7,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Auth;
 class BrandController extends Controller
 {
     function __construct()
@@ -25,7 +25,14 @@ class BrandController extends Controller
         $category = Brand::all();
 
         $success = 'Requested Successful';
-        return response(['user' => $category, 'message' =>  $success,]);
+        return response([
+            'status' => 200,
+            'message' =>  $success,
+            'data' =>
+            [
+                'items' => $category
+            ],
+        ]);
     }
 
 

@@ -79,9 +79,12 @@ Route::post('logout', [AuthController::class,'logout']);
     Route::post('create_product', [ProductController::class,'store']);
     Route::post('add_pro_images', [ProductController::class,'add_more_image']);
     Route::get('all_product', [ProductController::class,'index']);
+    Route::get('all_images/{pro_id}', [ProductController::class,'images']);
+    Route::get('all_product_two', [ProductController::class,'get_product']);
     Route::put('update_image/{id}', [ProductController::class,'updateImage']);
     Route::put('update_product/{id}', [ProductController::class,'update']);
-    Route::get('update_product/{id}', [ProductController::class,'destroy']);
+    Route::delete('delete_product/{id}', [ProductController::class,'destroy']);
+    Route::delete('delete_product_img/{id}', [ProductController::class,'destroy_image']);
 
 });
 

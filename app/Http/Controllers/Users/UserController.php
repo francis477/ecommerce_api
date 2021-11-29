@@ -56,7 +56,7 @@ class UserController extends Controller
         $success = 'Requested Successfully';
         return response(
             [
-            'status' => 201,
+            'status' => 200,
             'message' =>  $success,
             'data' =>
             [
