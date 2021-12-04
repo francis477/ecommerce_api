@@ -24,7 +24,36 @@ class CategoryController extends Controller
             return abortAction();
         }
 
-        $category = Category::all();
+
+
+        if($request->size){
+            $size = $request->size;
+                    }else{
+                        $size = 10;
+                    }
+
+
+        // $pagination = Category::paginate($size);
+
+        $pagination = Category::all();
+
+// $pagination->firstItem(); // Returns the number of the first item from the current page
+
+// $pagination->lastItem(); // Returns the number of the last item from the current page
+
+// $pagination->total(); // Returns the total amount of items
+
+// $results->count()
+// $results->currentPage()
+// $results->firstItem()
+// $results->hasMorePages()
+// $results->lastItem()
+// $results->lastPage() (Not available when using simplePaginate)
+// $results->nextPageUrl()
+// $results->perPage()
+// $results->previousPageUrl()
+// $results->total() (Not available when using simplePaginate)
+// $results->url($page)
 
         $success = 'Requested Successful';
         return response([
@@ -32,7 +61,11 @@ class CategoryController extends Controller
             'message' =>  $success,
             'data' =>
             [
-                'items' => $category
+                // "totalItems" => $pagination->total(),
+                // "totalPage" => $pagination->count(),
+                // "currentPage" => $pagination->currentPage(),
+
+                'items' => $pagination
             ],
 
         ]);

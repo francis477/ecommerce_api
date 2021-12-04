@@ -23,15 +23,29 @@ class ProductController extends Controller
             return abortAction();
         }
 
+        $validator = Validator::make($request->all(), [
+            'perpage' => 'numeric|min:1|max:1000'
+        ]);
+
+        if ($validator->fails()) {
+            failedValidation($validator);
+        }
+
         $query_product = Product::with(['category','brand','product_image']);
+
+
 
 
 
         if($request->minPrice){
             $minPrice = $request->minPrice;
+        }else{
+            $minPrice = '';
         }
         if($request->maxPrice){
             $maxPrice = $request->maxPrice;
+        }else{
+            $maxPrice = '';
         }
 
         if($request->keyword){
@@ -100,9 +114,10 @@ $perpage = $request->perpage;
         $query_product = Product::with(['category','brand','product_image']);
 
 
-        if($request->keyword){
-            $query_product->where('pro_name', 'LIKE', '%' .$request->keyword.'%');
+        if($request->search){
+            $query_product->where('pro_name', 'LIKE', '%' .$request->search.'%');
         }
+
 
         if($request->category){
             $query_product->whereHas('category', function($query) use ($request){
@@ -115,15 +130,11 @@ $perpage = $request->perpage;
                 $query->where('slug', $request->brand);
             });
         }
-
-
-
-
-        if($request->brand){
-            $query_product->whereHas('brand', function($query) use ($request){
-                $query->where('slug', $request->brand);
-            });
-        }
+        // if($request->brand){
+        //     $query_product->whereHas('brand', function($query) use ($request){
+        //         $query->where('slug', $request->brand);
+        //     });
+        // }
 
         if($request->sortBy && in_array($request->sortBy,['id','created_at'])){
             $sortBy = $request->sortBy;

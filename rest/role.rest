@@ -5,10 +5,27 @@
 GET http://localhost:8888/ecommerce_api/api/roles
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+Authorization:  Bearer 1|AE7uO0r1QJHO7WgaK8ctRJETG4hruLebW1NrQy6C
+
+
+#### Get All Roles With Permissions
+GET http://localhost:8888/ecommerce_api/api/roles_permission
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|zoWgInjlsS1EyHChQHeoHOmthqHxiotiWpsgrLIm
 
 #### Create   Role
 POST http://localhost:8888/ecommerce_api/api/add_role
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
+
+{
+    "name": "admin"
+}
+
+#### Upate   Role
+PUT http://localhost:8888/ecommerce_api/api/role/1
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
@@ -21,8 +38,7 @@ Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
 POST http://localhost:8888/ecommerce_api/api/create_role
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
-
+Authorization:  Bearer 3|FnULTGi3seqAmV37KC3db0LkDdAJqaBlHIgtL3Su
 {
     "name": 6,
     "permission":["7","8","9","10"]
@@ -30,29 +46,28 @@ Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
 
 
 #### Get Role With Permission
-GET http://localhost:8888/ecommerce_api/api/show_role/1
+GET http://localhost:8888/ecommerce_api/api/show_role/3
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 13|IpTsMoail7ddCp3VYWWkOKHqWdEDAW22NS9L2SnK
+Authorization:  Bearer 3|FnULTGi3seqAmV37KC3db0LkDdAJqaBlHIgtL3Su
 
 
 
 #### Edit Permission Assign By Role
-GET http://localhost:8888/ecommerce_api/api/edit_role/1
+GET http://localhost:8888/ecommerce_api/api/edit_role/3
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 6|qzOSCYMK3Hpd13QlRmad89nvoRJERSFA15JAK9BK
+Authorization:  Bearer 3|FnULTGi3seqAmV37KC3db0LkDdAJqaBlHIgtL3Su
 
 
-#### Update Role Assign To Permission
-PUT http://localhost:8888/ecommerce_api/api/update_role/6
+#### Update Permission Assign To Role
+PUT http://localhost:8888/ecommerce_api/api/update_role/3
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 2|0uzo7OCUGD7oDjdW7SxEjXrejyxggOCEXRgokWth
+Authorization:  Bearer 3|FnULTGi3seqAmV37KC3db0LkDdAJqaBlHIgtL3Su
 
 {
-    "name": 6,
-    "permission":["7","8","9","3"]
+    "permission":["7","1","5"]
 }
 
 

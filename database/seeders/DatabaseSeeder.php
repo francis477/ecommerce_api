@@ -2,6 +2,7 @@
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\PerModule;
 use App\Models\ProductReview;
 use App\Models\Rating;
 use App\Models\User;
@@ -27,46 +28,71 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         // $this->call(UserSeeder::class);
         // $this->call(PermissionSeeder::class);
+
+        PerModule::create([
+            'm_name' => 'User'
+        ]);
+        PerModule::create([
+            'm_name' => 'Customer'
+        ]);
+        PerModule::create([
+            'm_name' => 'Product'
+        ]);
+        PerModule::create([
+            'm_name' => 'Category'
+        ]);
+        PerModule::create([
+            'm_name' => 'Brand'
+        ]);
+        PerModule::create([
+            'm_name' => 'Role'
+        ]);
+        PerModule::create([
+            'm_name' => 'Permission'
+        ]);
+        PerModule::create([
+            'm_name' => 'Contact'
+        ]);
         $data = [
-            ['name' => 'user.view'],
-            ['name' => 'user.create'],
-            ['name' => 'user.update'],
-            ['name' => 'user.delete'],
+            ['name' => 'user.view','model_id' => 1,'label' => 'User'],
+            ['name' => 'user.create','model_id' => 1,'label' => 'User'],
+            ['name' => 'user.update','model_id' => 1,'label' => 'User'],
+            ['name' => 'user.delete','model_id' => 1,'label' => 'User'],
 
-            ['name' => 'customer.view'],
-            ['name' => 'customer.create'],
-            ['name' => 'customer.update'],
-            ['name' => 'customer.delete'],
+            ['name' => 'customer.view','model_id' => 2,'label' => 'Customer'],
+            ['name' => 'customer.create','model_id' => 2,'label' => 'Customer'],
+            ['name' => 'customer.update','model_id' => 2,'label' => 'Customer'],
+            ['name' => 'customer.delete','model_id' => 2,'label' => 'Customer'],
 
-            ['name' => 'product.view'],
-            ['name' => 'product.create'],
-            ['name' => 'product.update'],
-            ['name' => 'product.delete'],
+            ['name' => 'product.view','model_id' => 3,'label' => 'Product'],
+            ['name' => 'product.create','model_id' => 3,'label' => 'Product'],
+            ['name' => 'product.update','model_id' => 3,'label' => 'Product'],
+            ['name' => 'product.delete','model_id' => 3,'label' => 'Product'],
 
-            ['name' => 'category.view'],
-            ['name' => 'category.create'],
-            ['name' => 'category.update'],
-            ['name' => 'category.delete'],
+            ['name' => 'category.view','model_id' => 4,'label' => 'Category'],
+            ['name' => 'category.create','model_id' => 4,'label' => 'Category'],
+            ['name' => 'category.update','model_id' => 4,'label' => 'Category'],
+            ['name' => 'category.delete','model_id' => 4,'label' => 'Category'],
 
-            ['name' => 'brand.view'],
-            ['name' => 'brand.create'],
-            ['name' => 'brand.update'],
-            ['name' => 'brand.delete'],
+            ['name' => 'brand.view','model_id' => 5,'label' => 'Brand'],
+            ['name' => 'brand.create','model_id' => 5,'label' => 'Brand'],
+            ['name' => 'brand.update','model_id' => 5,'label' => 'Brand'],
+            ['name' => 'brand.delete','model_id' => 5,'label' => 'Brand'],
 
-            ['name' => 'role.view'],
-            ['name' => 'role.create'],
-            ['name' => 'role.update'],
-            ['name' => 'role.delete'],
+            ['name' => 'role.view','model_id' => 6,'label' => 'Role'],
+            ['name' => 'role.create','model_id' => 6,'label' => 'Role'],
+            ['name' => 'role.update','model_id' => 6,'label' => 'Role'],
+            ['name' => 'role.delete','model_id' => 6,'label' => 'Role'],
 
-            ['name' => 'permission.view'],
-            ['name' => 'permission.create'],
-            ['name' => 'permission.update'],
-            ['name' => 'permission.delete'],
+            ['name' => 'permission.view','model_id' => 7,'label' => 'Permission'],
+            ['name' => 'permission.create','model_id' => 7,'label' => 'Permission'],
+            ['name' => 'permission.update','model_id' => 7,'label' => 'Permission'],
+            ['name' => 'permission.delete','model_id' => 7,'label' => 'Permission'],
 
-            ['name' => 'contact.view'],
-            ['name' => 'contact.create'],
-            ['name' => 'contact.update'],
-            ['name' => 'contact.delete'],
+            ['name' => 'contact.view','model_id' => 8,'label' => 'Contact'],
+            ['name' => 'contact.create','model_id' => 8,'label' => 'Contact'],
+            ['name' => 'contact.update','model_id' => 8,'label' => 'Contact'],
+            ['name' => 'contact.delete','model_id' => 8,'label' => 'Contact'],
 
         ];
 

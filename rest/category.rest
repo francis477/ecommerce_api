@@ -1,9 +1,9 @@
 # --- ROLE API's ----
 #### Create   Role
-GEt http://localhost:8888/ecommerce_api/api/category
+GEt http://localhost:8888/ecommerce_api/api/category?page=1&size=2
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 
 

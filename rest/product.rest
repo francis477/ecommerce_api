@@ -3,8 +3,7 @@
 PUT http://localhost:8888/ecommerce_api/api/update_product/1
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
-
+Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 {
     "pro_name": "ProductOne",
     "pro_price": "233.00",
@@ -23,7 +22,7 @@ Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
 GET http://localhost:8888/ecommerce_api/api/all_product_two
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 
 
@@ -31,7 +30,7 @@ Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
 GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
+Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 
 
@@ -40,15 +39,13 @@ Authorization:  Bearer 1|V37YdZrAKr3DZcpcviP5eLBUz2EByNtY7zoXs0TP
 # GET http://localhost:8888/ecommerce_api/api/all_product
 # Content-Type: application/json
 # Accept: application/json
-# Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
-
+# Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 ### Get All  Product
-GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10&minPrice=100&maxPrice=300
+GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10&minPrice=&maxPrice=
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 1|rGbAJULD0lzOOSCoWZVjFWv7jBrYjMS4jsPVxt9k
-
+Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 
 #### Delete Product

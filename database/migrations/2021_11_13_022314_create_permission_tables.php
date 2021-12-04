@@ -34,18 +34,28 @@ class CreatePermissionTables extends Migration
 
 
 
+        Schema::create('per_modules', function (Blueprint $table) {
+            $table->id();
+            $table->string('m_name');
+            $table->timestamps();
+        });
+
+
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->timestamps();
+            $table->string('name');
+            $table->string('label');
+            $table->string('guard_name');
             $table->unique(['name', 'guard_name']);
-            // $table->unsignedBigInteger('m_id')->nullable();
-            // $table->foreign('m_id')
-            //     ->references('id')
-            //     ->on('allmodules')
-            //     ->onDelete('cascade');
+            $table->unsignedBigInteger('model_id')->nullable();
+            $table->foreign('model_id')
+                ->references('id')
+                ->on('per_modules')
+                ->onDelete('cascade');
+            $table->timestamps();
         });
+
+
 
 
 
@@ -153,6 +163,7 @@ class CreatePermissionTables extends Migration
         Schema::drop($tableNames['model_has_permissions']);
         Schema::drop($tableNames['roles']);
         Schema::drop($tableNames['permissions']);
-        // Schema::drop($tableNames['allmodules']);
+        Schema::dropIfExists('per_modules');
+        // Schema::dropIfExists('models');
     }
 }

@@ -21,7 +21,14 @@ Authorization:  Bearer 39|NaLpp1YVl9EHfPjjJPXMgOcR9Ib5pret3WcQAzFI
 GET http://localhost:8888/ecommerce_api/api/all_permission
 Content-Type: application/json
 Accept: application/json
-Authorization:  Bearer 39|NaLpp1YVl9EHfPjjJPXMgOcR9Ib5pret3WcQAzFI
+Authorization:  Bearer 1|Bl1lRAPz6sIKXuDTxNLm3S7rbkLL0INnfJc0zCUR
+
+
+#### Get All Permissions For Edit
+GET http://localhost:8888/ecommerce_api/api/eidt_permission_data
+Content-Type: application/json
+Accept: application/json
+Authorization:  Bearer 1|Bl1lRAPz6sIKXuDTxNLm3S7rbkLL0INnfJc0zCUR
 
 #### Get Permissions By Id
 GET http://localhost:8888/ecommerce_api/api/get_permission/3

@@ -46,15 +46,18 @@ Route::post('logout', [AuthController::class,'logout']);
 
     // User Role
     Route::get('roles', [RoleController::class,'index']);
+    Route::get('roles_permission', [RoleController::class,'rolewithPermission']);
     Route::post('add_role', [RoleController::class,'createRole']);
     Route::post('create_role', [RoleController::class,'store']);
     Route::get('show_role/{id}', [RoleController::class,'show']);
     Route::get('edit_role/{id}', [RoleController::class,'edit']);
     Route::put('update_role/{id}', [RoleController::class,'update']);
+    Route::put('role/{id}', [RoleController::class,'updateRole']);
     Route::delete('delete_role/{id}', [RoleController::class,'destroy']);
 
        // Permission Route
        Route::get('all_permission', [PermissionContorller::class,'index']);
+       Route::get('eidt_permission_data', [PermissionContorller::class,'edit_query']);
        Route::post('create_permission', [PermissionContorller::class,'store']);
        Route::get('get_permission/{id}', [PermissionContorller::class,'show']);
        Route::put('update_permission/{id}', [PermissionContorller::class,'update']);

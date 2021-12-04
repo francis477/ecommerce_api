@@ -37,6 +37,14 @@ class RoleController extends Controller
         return response(['message' =>  $success,'data' =>['items'=>$data]] );
     }
 
+
+    public function rolewithPermission()
+    {
+        $role_permissions = Role::orderBy('id', 'DESC')->with('permissions:id,name,model_id')->get();
+        $success = 'Requested Successfully';
+        return response(['message' =>  $success,'data' =>['items'=>$role_permissions]] );
+    }
+
     public function createRole(Request $request)
     {
         $this->validate($request, [
@@ -51,6 +59,24 @@ class RoleController extends Controller
         );
         $success = 'Created Successfully';
         return response(['data' => $role, 'message' =>  $success,]);
+    }
+
+
+
+    public function updateRole(Request $request, $id)
+    {
+        $role_id = Role::find($id);
+        if(!$role_id){
+            return notFound();
+        };
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        $role_id->name = $request->name;
+        $role_id->save();
+
+        $success = 'Updated Successfully';
+        return response(['message' =>  $success,]);
     }
 
 
@@ -126,10 +152,18 @@ class RoleController extends Controller
             ->all();
 
 
+            $convert_id =  array_values($rolePermissions);
         $success = 'Requested Successfully';
 
-        return response(['role' => $role, 'permission' => $permission, 'rolePermissions' => $rolePermissions, 'message' =>  $success,]);
+        return response(['message' =>  $success,
+        'data' => [
+            'items' => [
+            'role' => $role, 'permission' => $permission, 'rolePermissions' => $convert_id
+            ]
+        ]
+    ]);
     }
+
 
 
     /**
@@ -142,15 +176,12 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
             'permission' => 'required',
         ]);
 
 
         $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->guard_name = "web";
-        $role->save();
+
         $role->syncPermissions($request->input('permission'));
 
         $success = 'Updated Successfully';
