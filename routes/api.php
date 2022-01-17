@@ -94,3 +94,7 @@ Route::post('logout', [AuthController::class,'logout']);
 Route::get('home', [HomeController::class,'index']);
 
 Route::post('auth', [LoginController::class,'login']);
+
+Route::get('home_product', [HomeController::class,'home_product']);
+Route::get('home_product/{id}', [HomeController::class,'home_product_id']);
+

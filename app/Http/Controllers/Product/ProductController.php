@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Image;
 use Illuminate\Support\Facades\File;
 use Validator;
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     function __construct()
@@ -160,43 +161,7 @@ $perpage = $request->perpage;
             $product = $query_product->OrderBY($sortBy,$sortOrder)->get();
         }
 
-        // foreach($product as $value){
 
-        //     $p_product [] = [
-        //         "id" => $value['id'],
-        //         "pro_name" => $value['pro_name'],
-        //         "old_price"=> $value['old_price'],
-        //         "pro_price" => $value['pro_price'],
-        //         "pro_details" =>  $value['pro_details'],
-        //         "pro_stock" => $value['pro_stock'],
-        //         "rating"=> $value['rating'],
-        //         "category_id"=> $value['category_id'],
-        //         "brand_id"=> $value['brand_id'],
-        //         "created_at"=> $value['created_at'],
-        //     ];
-
-
-        //     foreach ($product->category as $value) {
-
-        //         $p_category [] = [
-        //             "name" => $value['name'],
-
-        //         ];
-
-        //     };
-
-
-        //     foreach ($product->brand as $value) {
-
-        //         $p_brand [] = [
-        //             "name" => $value['name'],
-
-        //         ];
-
-        //     };
-
-
-        // }
 
         $success = 'Requested Successful';
         return response([
@@ -235,11 +200,13 @@ $perpage = $request->perpage;
         if ($validator->fails()) {
             failedValidation($validator);
         }else{
+            $slug = Str::slug($request->pro_name, '-');
         // $cal_rate = ($request->rating * 5) / 100;
         // number_format($cal_rate,0);
         $product_tb = new Product();
         $product_img_tb = new ProductImage();
         $product_tb->pro_name = $request->pro_name;
+        $product_tb->pro_slug = $slug;
         $product_tb->pro_price = $request->pro_price;
         $product_tb->old_price = $request->old_price;
         $product_tb->pro_details = $request->pro_details;
@@ -351,9 +318,11 @@ $perpage = $request->perpage;
         if ($validator->fails()) {
             failedValidation($validator);
         } else {
+            $slug = Str::slug($request->pro_name, '-');
 
             // $cal_rate = ($request->rating * 5) / 100;
             $product_tb->pro_name = $request->pro_name;
+            $product_tb->pro_slug = $slug;
             $product_tb->pro_price = $request->pro_price;
             $product_tb->old_price = $request->old_price;
             $product_tb->pro_details = $request->pro_details;
@@ -512,6 +481,12 @@ $perpage = $request->perpage;
 
         ]);
     }
+
+
+
+
+
+
 
 }
 

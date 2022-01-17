@@ -38,6 +38,8 @@ class LoginController extends Controller
             ], 401);
         };
 
+
+
     //Create Token
         $token = $user->createToken($user->id)->plainTextToken;
            //Get User Role

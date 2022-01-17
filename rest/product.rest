@@ -35,11 +35,11 @@ Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
 
 
-#### Get All  Product
-# GET http://localhost:8888/ecommerce_api/api/all_product
-# Content-Type: application/json
-# Accept: application/json
-# Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
+#### Get All  Home Product
+GET http://localhost:8888/ecommerce_api/api/home_product/
+Content-Type: application/json
+Accept: application/json
+
 
 ### Get All  Product
 GET http://localhost:8888/ecommerce_api/api/all_product?sortBy=id&sortOrder=desc&paginate=1&perpage=10&minPrice=&maxPrice=
