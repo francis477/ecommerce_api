@@ -32,6 +32,13 @@ Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 5|hPXnxxUV35EGFioYRLbFhbmz92Ygx2Dp3ssJ6o4i
 
+#### Get All POS Product
+GET http://localhost:8888/ecommerce_api/api/pos_product
+Content-Type: application/json
+Accept: application/json
+
+
+
 
 
 
@@ -60,3 +67,14 @@ GET  http://localhost:8888/ecommerce_api/api/all_images/3
 Content-Type: application/json
 Accept: application/json
 Authorization:  Bearer 2|G54J9X8d4KpxKwOyaLwayWJRZsLGVoaWz0sZFNKO
+
+
+#### Get All POS Category
+GET http://localhost:8888/ecommerce_api/api/home_category
+Content-Type: application/json
+Accept: application/json
+
+#### Get All POS Brand
+GET http://localhost:8888/ecommerce_api/api/home_brand
+Content-Type: application/json
+Accept: application/json

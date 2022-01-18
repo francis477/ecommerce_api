@@ -97,4 +97,8 @@ Route::post('auth', [LoginController::class,'login']);
 
 Route::get('home_product', [HomeController::class,'home_product']);
 Route::get('home_product/{id}', [HomeController::class,'home_product_id']);
+Route::get('pos_product', [HomeController::class,'get_product']);
+
+Route::get('home_category', [HomeController::class,'category']);
+Route::get('home_brand', [HomeController::class,'brand']);
 
